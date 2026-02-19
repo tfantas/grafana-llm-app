@@ -76,7 +76,7 @@ func TestNewGrafanaCloudGating(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			s := Settings{
-				IsGrafanaCloud:  tc.isGrafanaCloud,
+				IsGrafanaCloud:   tc.isGrafanaCloud,
 				IsToolsetEnabled: func(Toolset) bool { return true },
 			}
 			for _, ts := range allToolsets {
