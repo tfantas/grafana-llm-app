@@ -12,16 +12,27 @@ import (
 type Toolset string
 
 const (
-	ToolsetSearch     Toolset = "search"
-	ToolsetDatasource Toolset = "datasource"
-	ToolsetIncident   Toolset = "incident"
-	ToolsetPrometheus Toolset = "prometheus"
-	ToolsetLoki       Toolset = "loki"
-	ToolsetAlerting   Toolset = "alerting"
-	ToolsetDashboard  Toolset = "dashboard"
-	ToolsetOnCall     Toolset = "oncall"
-	ToolsetAsserts    Toolset = "asserts"
-	ToolsetSift       Toolset = "sift"
+	ToolsetSearch        Toolset = "search"
+	ToolsetDatasource    Toolset = "datasource"
+	ToolsetIncident      Toolset = "incident"
+	ToolsetPrometheus    Toolset = "prometheus"
+	ToolsetLoki          Toolset = "loki"
+	ToolsetAlerting      Toolset = "alerting"
+	ToolsetDashboard     Toolset = "dashboard"
+	ToolsetOnCall        Toolset = "oncall"
+	ToolsetAsserts       Toolset = "asserts"
+	ToolsetSift          Toolset = "sift"
+	ToolsetPyroscope     Toolset = "pyroscope"
+	ToolsetNavigation    Toolset = "navigation"
+	ToolsetAnnotations   Toolset = "annotations"
+	ToolsetRendering     Toolset = "rendering"
+	ToolsetAdmin         Toolset = "admin"
+	ToolsetClickHouse    Toolset = "clickhouse"
+	ToolsetCloudWatch    Toolset = "cloudwatch"
+	ToolsetElasticsearch Toolset = "elasticsearch"
+	ToolsetExamples      Toolset = "examples"
+	ToolsetSearchLogs    Toolset = "searchlogs"
+	ToolsetFolder        Toolset = "folder"
 )
 
 // Settings contains configuration required by the MCP servers.
@@ -108,6 +119,39 @@ func New(settings Settings, pluginVersion string) (*MCP, error) {
 	}
 	if settings.IsGrafanaCloud && settings.isToolsetEnabled(ToolsetSift) {
 		tools.AddSiftTools(srv, true)
+	}
+	if settings.isToolsetEnabled(ToolsetPyroscope) {
+		tools.AddPyroscopeTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetNavigation) {
+		tools.AddNavigationTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetAnnotations) {
+		tools.AddAnnotationTools(srv, true)
+	}
+	if settings.isToolsetEnabled(ToolsetRendering) {
+		tools.AddRenderingTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetAdmin) {
+		tools.AddAdminTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetClickHouse) {
+		tools.AddClickHouseTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetCloudWatch) {
+		tools.AddCloudWatchTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetElasticsearch) {
+		tools.AddElasticsearchTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetExamples) {
+		tools.AddExamplesTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetSearchLogs) {
+		tools.AddSearchLogsTools(srv)
+	}
+	if settings.isToolsetEnabled(ToolsetFolder) {
+		tools.AddFolderTools(srv, true)
 	}
 
 	acc, err := newAccessTokenClient(settings.AccessToken, settings.Tenant, settings.IsGrafanaCloud)
