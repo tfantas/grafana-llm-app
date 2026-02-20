@@ -5,7 +5,10 @@ import "testing"
 var allToolsets = []Toolset{
 	ToolsetSearch, ToolsetDatasource, ToolsetIncident, ToolsetPrometheus,
 	ToolsetLoki, ToolsetAlerting, ToolsetDashboard, ToolsetOnCall,
-	ToolsetAsserts, ToolsetSift,
+	ToolsetAsserts, ToolsetSift, ToolsetPyroscope, ToolsetNavigation,
+	ToolsetAnnotations, ToolsetRendering, ToolsetAdmin, ToolsetClickHouse,
+	ToolsetCloudWatch, ToolsetElasticsearch, ToolsetExamples,
+	ToolsetSearchLogs, ToolsetFolder,
 }
 
 func TestIsToolsetEnabled(t *testing.T) {

@@ -168,16 +168,27 @@ type MCPSettings struct {
 
 // A nil pointer means the toolset is enabled by default; a pointer to false disables it.
 type MCPToolsets struct {
-	Search     *bool `json:"search"`
-	Datasource *bool `json:"datasource"`
-	Incident   *bool `json:"incident"`
-	Prometheus *bool `json:"prometheus"`
-	Loki       *bool `json:"loki"`
-	Alerting   *bool `json:"alerting"`
-	Dashboard  *bool `json:"dashboard"`
-	OnCall     *bool `json:"oncall"`
-	Asserts    *bool `json:"asserts"`
-	Sift       *bool `json:"sift"`
+	Search        *bool `json:"search"`
+	Datasource    *bool `json:"datasource"`
+	Incident      *bool `json:"incident"`
+	Prometheus    *bool `json:"prometheus"`
+	Loki          *bool `json:"loki"`
+	Alerting      *bool `json:"alerting"`
+	Dashboard     *bool `json:"dashboard"`
+	OnCall        *bool `json:"oncall"`
+	Asserts       *bool `json:"asserts"`
+	Sift          *bool `json:"sift"`
+	Pyroscope     *bool `json:"pyroscope"`
+	Navigation    *bool `json:"navigation"`
+	Annotations   *bool `json:"annotations"`
+	Rendering     *bool `json:"rendering"`
+	Admin         *bool `json:"admin"`
+	ClickHouse    *bool `json:"clickhouse"`
+	CloudWatch    *bool `json:"cloudwatch"`
+	Elasticsearch *bool `json:"elasticsearch"`
+	Examples      *bool `json:"examples"`
+	SearchLogs    *bool `json:"searchlogs"`
+	Folder        *bool `json:"folder"`
 }
 
 // An unknown toolset name logs a warning and returns false.
@@ -204,6 +215,28 @@ func (f MCPToolsets) IsEnabled(toolset mcp.Toolset) bool {
 		ptr = f.Asserts
 	case mcp.ToolsetSift:
 		ptr = f.Sift
+	case mcp.ToolsetPyroscope:
+		ptr = f.Pyroscope
+	case mcp.ToolsetNavigation:
+		ptr = f.Navigation
+	case mcp.ToolsetAnnotations:
+		ptr = f.Annotations
+	case mcp.ToolsetRendering:
+		ptr = f.Rendering
+	case mcp.ToolsetAdmin:
+		ptr = f.Admin
+	case mcp.ToolsetClickHouse:
+		ptr = f.ClickHouse
+	case mcp.ToolsetCloudWatch:
+		ptr = f.CloudWatch
+	case mcp.ToolsetElasticsearch:
+		ptr = f.Elasticsearch
+	case mcp.ToolsetExamples:
+		ptr = f.Examples
+	case mcp.ToolsetSearchLogs:
+		ptr = f.SearchLogs
+	case mcp.ToolsetFolder:
+		ptr = f.Folder
 	default:
 		log.DefaultLogger.Warn("Unknown MCP toolset", "toolset", toolset)
 		return false
